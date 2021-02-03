@@ -1,0 +1,35 @@
+package snake;
+
+import java.awt.Graphics;
+
+import javax.swing.JFrame;
+
+public class GameWindow extends JFrame {
+
+
+	private static final long serialVersionUID = 1L;
+
+	private Rect background;
+	
+		
+	public GameWindow() {
+		background = new Rect(0,0,Constants.WINDOW_WIDTH,Constants.WINDOW_HEIGHT);
+		//titulo
+		setTitle(Constants.GAME_TITLE);
+		//tamanho da janela
+		setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
+		// abre centralizado
+		setLocationRelativeTo(null);
+		//sair ao fechar
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//visível
+		setVisible(true);
+	}
+	
+	@Override
+	public void paint(Graphics g) {
+		background.draw(g);
+		
+	}
+	
+}

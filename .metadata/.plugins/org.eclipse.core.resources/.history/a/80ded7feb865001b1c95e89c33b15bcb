@@ -1,0 +1,10 @@
+package snake;
+
+public class Snake extends Shape {
+	
+	public Snake() {
+		setColor(Constants.SNAKE_COLOR);
+		Rect rect = new Rect(120,100,6,6);
+		
+	}
+}

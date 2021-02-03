@@ -1,0 +1,23 @@
+package snake;
+
+import javax.swing.JFrame;
+
+public class GameWindow extends JFrame {
+
+
+	private static final long serialVersionUID = 1L;
+
+	public GameWindow() {
+		//titulo
+		setTitle(Constants.GAME_TITLE);
+		//tamanho da janela
+		setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
+		// abre centralizado
+		setLocationRelativeTo(null);
+		//sair ao fechar
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//visível
+		setVisible(true);
+	}
+	
+}

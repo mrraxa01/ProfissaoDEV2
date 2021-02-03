@@ -1,0 +1,38 @@
+package snake;
+
+import java.awt.Graphics;
+
+public class Rect {
+	
+	private int width, height, x, y ;
+	
+	public Rect(int width, int height, int x, int y) {
+		this.width = width;
+		this.height = height;
+		this.x = x;
+		this.y = y;
+	}
+	
+	public void draw(Graphics g) {
+		g.fillRect(x, y, width, height);
+	}
+
+	
+
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+	
+}

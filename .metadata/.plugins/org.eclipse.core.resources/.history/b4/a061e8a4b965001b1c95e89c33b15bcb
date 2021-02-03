@@ -1,0 +1,63 @@
+package snake;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Point;
+
+public class Rect extends Drawable{
+	//point fornece as coordenadas x e y
+	private Point location;
+	//dimension fornece a altura e largura
+	private Dimension dimension;
+
+	public Rect(int x, int y,int width, int height) {
+		this.location = new Point(x,y);
+		this.dimension= new Dimension(width, height);
+	
+	}
+	
+	
+	
+	public Rect(Point location, Dimension dimension) {
+		this.location = location;
+		this.dimension = dimension;
+		
+	
+	}
+
+
+
+	public void draw(Graphics g) {
+		//getcolor busca a cor na superclasse
+		g.setColor(getColor());
+		g.fillRect((int)location.getX(),(int)location.getY(),(int)dimension.getWidth(),(int)dimension.getHeight());
+	}
+	
+	//metodo vai acrescentar 1 rect a snake
+	public Rect duplicate(Rect baseRect) {
+		int baseX = (int) baseRect.getLocation().getX();
+		int baseY = (int) baseRect.getLocation().getY();
+		int baseWidth = (int) baseRect.getDimension().getWidth();
+		Point newPoint = new Point(baseX - baseWidth, baseY);
+		Rect newRect = new Rect(newPoint, baseRect.getDimension());
+		return newRect;
+	}
+
+	public Point getPoint() {
+		return location;
+	}
+
+	public Dimension getDimension() {
+		return dimension;
+	}
+
+	public Point getLocation() {
+		return location;
+	}
+}
+
+	
+	
+
+
