@@ -1,7 +1,6 @@
 package snake;
 
-
-
+import core.Game;
 
 public class Application {
 

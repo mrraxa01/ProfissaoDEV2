@@ -1,0 +1,46 @@
+package core;
+
+import graphics.Renderer;
+import scene.Background;
+import scene.Snake;
+import util.GameUtils;
+
+public class Game {
+	
+	private GameWindow gameWindow;
+	private Snake snake;
+	private Renderer renderer;
+		
+	
+	public void start() {
+		
+		snake = new Snake();
+		gameWindow = new GameWindow(snake);
+		renderer = gameWindow.getRenderer();
+		
+		/*refatorados no método addElementsToScreen
+		renderer.add(new Background());
+		renderer.add(snake);
+		*/
+	
+		addElementToScreen();
+	
+		run();
+		}
+	private void addElementToScreen() {
+		renderer.add(new Background());
+		renderer.add(snake);
+	}
+	public void run() {
+		while(!isGameOver()) {
+			snake.move();
+			gameWindow.repaint();
+			GameUtils.sleep(30);
+		}
+		
+	}
+	
+	private boolean isGameOver() {
+		return false;
+	}
+}

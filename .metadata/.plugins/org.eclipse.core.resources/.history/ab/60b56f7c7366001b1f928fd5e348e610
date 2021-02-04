@@ -1,0 +1,33 @@
+package core;
+
+import graphics.Renderer;
+import scene.Background;
+import scene.Snake;
+
+public class Game {
+	
+	private GameWindow gameWindow;
+	private Snake snake;
+		
+	
+	public void start() {
+		
+		snake = new Snake();
+		gameWindow = new GameWindow(snake);
+				
+		Renderer renderer = gameWindow.getRenderer();
+		renderer.add(new Background());
+		renderer.add(snake);
+		
+		}
+	public void run() {
+		while(!isGameOver()) {
+			gameWindow.repaint();
+		}
+		
+	}
+	
+	private boolean isGameOver() {
+		return false;
+	}
+}

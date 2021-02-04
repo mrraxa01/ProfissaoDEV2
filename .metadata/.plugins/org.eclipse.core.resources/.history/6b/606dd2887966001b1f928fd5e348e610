@@ -1,0 +1,29 @@
+package scene;
+
+import graphics.Rect;
+import graphics.Shape;
+import util.Constants;
+
+public class Snake extends Shape {
+	
+	public Snake() {
+		super(Constants.SNAKE_COLOR);
+		
+		//adiciona a cabeça
+		Rect rect = new Rect(Constants.SNAKE_INITIAL_X, Constants.SNAKE_INITIAL_Y, Constants.SNAKE_PIECE_SIZE, Constants.SNAKE_PIECE_SIZE);
+		addRect(rect);
+		
+		for(int i = 1; i<Constants.SNAKE_SIZE; i++) {
+			rect = duplicate(rect);
+			addRect(rect);
+		}
+	}
+	
+	public void up() {
+		System.out.println("UP");
+	}
+	public void down() {}
+	public void left() {}
+	public void right() {}
+	
+}
