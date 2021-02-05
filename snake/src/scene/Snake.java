@@ -9,6 +9,7 @@ import util.GameUtils;
 public class Snake extends Shape {
 	
 	private Direction direction;
+	private int piecesToElongate;
 	
 	public Snake() {
 		super(Constants.SNAKE_COLOR);
@@ -24,32 +25,38 @@ public class Snake extends Shape {
 		}
 	}
 	
-	public void move() {
+	public synchronized void move() {
 		if(direction != Direction.NONE) {
 		Rect head = getFirstRect();
+		Rect tail = getLastRect();
 		GameUtils.moveRect(getRects());
 		Rect newHead = duplicate(head, direction);
 		getRects().set(0, newHead);
 		
+		if(piecesToElongate > 0) {
+			getRects().add(tail);
+			piecesToElongate --;
+		}
+		
 		}
 	}
 	
-	public void up() {
+	public synchronized void up() {
 		if(direction.canChangeTo(Direction.UP)) {
 		direction = Direction.UP;
 		}
 	}
-	public void down() {
+	public synchronized void down() {
 		if(direction.canChangeTo(Direction.DOWN)) {
 		direction = Direction.DOWN;
 		}
 	}
-	public void left() {
+	public synchronized void left() {
 		if(direction.canChangeTo(Direction.LEFT)) {
 		direction = Direction.LEFT;
 		}
 	}
-	public void right() {
+	public synchronized void right() {
 		if(direction.canChangeTo(Direction.RIGHT)) {
 		direction = Direction.RIGHT;
 		}
@@ -66,5 +73,9 @@ public class Snake extends Shape {
 			}
 		}
 		return false;
+	}
+	//alonga a snake quando pega a comida
+	public void elongate() {
+		piecesToElongate = Constants.SNAKE_ELONGATE_PIECES;
 	}
 }

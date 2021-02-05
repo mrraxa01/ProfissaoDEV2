@@ -2,6 +2,7 @@ package core;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -21,7 +22,9 @@ public class GameWindow extends JFrame implements KeyListener {
 	private Snake snake;
 	private Image buffer;
 	private Graphics gImage;
-		
+	private Rectangle drawingArea;
+	private long lastKeyboardEventTime;
+	
 	public GameWindow(Snake snake) {
 		
 		renderer = new Renderer();
@@ -42,10 +45,24 @@ public class GameWindow extends JFrame implements KeyListener {
 		
 		buffer = createImage(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
 		gImage = buffer.getGraphics();
+		defineDrawingArea();
 	}
+	
+	private void defineDrawingArea() {
+		int upperY = Constants.WINDOW_HEIGHT - (int) getContentPane().getSize().getHeight();
+		drawingArea = new Rectangle(0, upperY, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT - upperY);
+	}
+	
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
+		//toda vez que pressionar uma tecla será pego o momento
+		long now = System.currentTimeMillis();
+		
+		//se o intervalo de pressionamento da tecla for menor de 40 milisegundos o último toque será descartado
+		if(now - lastKeyboardEventTime < Constants.GAME_MIN_BETWEEN_KEYBOARD_EVENTS) {
+			return;
+		}
 		
 		if(e.getKeyCode() == KeyEvent.VK_UP) {
 			snake.up();
@@ -59,12 +76,16 @@ public class GameWindow extends JFrame implements KeyListener {
 			System.exit(0);
 		}
 		
+		lastKeyboardEventTime = now;
+		
 	}
 	
 	@Override
 	public void paint(Graphics gScreen) {
-		renderer.render(gImage);
-		gScreen.drawImage(buffer, 0, 0, null);
+		if(renderer != null && gImage != null && buffer != null) {
+			renderer.render(gImage);
+			gScreen.drawImage(buffer, 0, 0, null);
+		}
 	}
 	
 	public Renderer getRenderer() {
@@ -80,5 +101,16 @@ public class GameWindow extends JFrame implements KeyListener {
 	public void keyReleased(KeyEvent e) {
 		
 	}
+
+	public Rectangle getDrawingArea() {
+		return drawingArea;
+	}
+	
+	
+	
+	
+	
+	
+	
 	 	
 }

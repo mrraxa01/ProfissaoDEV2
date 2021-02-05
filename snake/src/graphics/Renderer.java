@@ -12,11 +12,11 @@ public class Renderer {
 		drawables = new ArrayList<>();
 	}
 	
-	public void add(Drawable drawable) {
+	public synchronized void add(Drawable drawable) {
 		drawables.add(drawable);
 	}
 	
-	public void remove(Drawable drawable) {
+	public synchronized void remove(Drawable drawable) {
 		drawables.remove(drawable);
 	}
 	
